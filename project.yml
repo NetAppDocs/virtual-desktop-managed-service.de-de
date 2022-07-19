@@ -1,0 +1,39 @@
+---
+settings:
+  name: Virtual Desktop Managed Service
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: de-de,us-en,ja-jp,zh-cn,zh-tw,ko-kr,fr-fr
+sidebar:
+  entries:
+  - title: VDMS-Dokumentation
+    url: "/index.html"
+  - title: Erste Schritte
+    entries:
+    - title: Voraussetzungen
+      url: "/serviceoffering.prerequisites.html"
+    - title: Zusammenfassung Des Service
+      url: "/serviceoffering.servicesummary.html"
+  - title: Lernprogramme
+    entries:
+    - title: Anwendungen Installieren
+      url: "/applications.installapplications.html"
+    - title: Aktualisieren Sie VM Image bereitstellen
+      url: "/images.updateimages.html"
+    - title: Weisen Sie den Anwendungsgruppen Benutzer zu
+      url: "/users.assigntoappgroup.html"
+    - title: Abrufen Der Anmeldeinformationen Für Domänenadministrator
+      url: "/administration.pam.html"
+    - title: Benutzerzugriff Hinzufügen
+      url: "/users.add.html"
+    - title: Entfernen Sie Den Benutzerzugriff
+      url: "/users.remove.html"
+    - title: Administratoren Hinzufügen/Entfernen
+      url: "/administration.addremoveadmins.html"
+  - title: Häufig gestellte FRAGEN ZU VDMS
+    entries:
+    - title: VDS-Administratorberechtigungen
+      url: "/FAQ.vdsadminpermissions.html"

@@ -1,0 +1,134 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.servicesummary.html 
+summary: VDMS Service-Angebot – Zusammenfassung 
+keywords:  
+---
+= Zusammenfassung des Virtual Desktop Managed Service (VDMS)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Zuweisung Von Benutzerressourcen
+
+
+NOTE: Dieser Artikel soll die technischen Details des VDMS genau beschreiben. Service-Details können sich ändern. Dieser Artikel stellt keine Änderung oder Änderung vorhandener Vereinbarungen, Verträge oder anderer Vereinbarungen zwischen NetApp und Kunden oder Partnern dar.
+
+
+
+=== Freigegebene Benutzer (SKU: VDMS-SUBS-SHARED-USER)
+
+Gemeinsame Benutzersitzungen werden auf einer virtuellen Session-Host-Maschine (SHVM) mit bis zu 10 Benutzersitzungen ausgeführt. Die Gesamtzahl der zugewiesenen gemeinsam genutzten SHVMs garantiert mindestens einen gemeinsam genutzten SHVM für alle 10 freigegebenen Benutzer in der Umgebung.
+
+*Ressourcen, die pro freigegebenen Benutzer zugewiesen sind:*
+
+* 8/10ths eines vCPU-Kerns
+* 6.4 gib RAM
+* 25 gib Storage
+
+
+*Shared SHVM Technische Daten:*
+
+* In der Regel aus dem link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] Und link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easyv4"] Familien von Azure Virtual Machines
+* 128 gib Standard-SSD-BS-Festplatte
+* Windows 10 Enterprise für Virtual Desktop
+* FSLogix-Benutzerprofil für angehängte Container
+* Attached Storage für Unternehmensanteil
+
+
+
+
+=== VDI-BENUTZER (SKU: VDMS-SUBS-VDI-USER)
+
+Die Session eines VDI-Benutzers wird auf einer dedizierten Session Host Virtual Machine (SHVM) ausgeführt, die keine anderen Benutzersitzungen hostet. Die Gesamtzahl an VDI SHVMs entspricht der Gesamtzahl an VDI-Nutzern in der Umgebung.
+
+*Zugewiesene Ressourcen pro VDI-Benutzer:*
+
+* 2 vCPU-Kerne
+* 8 gib RAM
+* 25 gib Storage
+
+
+*VDI SHVM Technische Details:*
+
+* In der Regel aus dem link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series["Dsv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv4-dsv4-series["Davor 4"] Und link:https://docs.microsoft.com/en-us/azure/virtual-machines/dav4-dasv4-series["Dasv4"] Familien von Azure Virtual Machines
+* 128 gib Standard-HDD-BS-Festplatte
+* Windows 10 Enterprise für Virtual Desktop
+* FSLogix-Benutzerprofil für angehängte Container
+* Attached Storage für Unternehmensanteil
+
+
+
+
+=== GPU-BENUTZER (SKU: VDMS-SUBS-GPU-USER)
+
+Die Session eines GPU-Benutzers wird auf einer dedizierten Session-Host Virtual Machine (SHVM) ausgeführt, die keine anderen Benutzersitzungen hostet. Die Gesamtzahl der GPU-SHVMs entspricht der Gesamtzahl der GPU-Benutzer in der Umgebung.
+
+*Zugewiesene Ressourcen pro GPU-Benutzer:*
+
+* 8 gib GPU-RAM
+* 25 gib Storage
+
+
+*GPU SHVM Technische Details:*
+
+* In der Regel aus dem link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv3-series["NVv3"] Und link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv4-series["NVv4"] Familien von Azure Virtual Machines
+* 128 gib Standard-HDD-BS-Festplatte
+* Windows 10 Enterprise für Virtual Desktop
+* FSLogix-Benutzerprofil für angehängte Container
+* Attached Storage für Unternehmensanteil
+
+
+
+
+== Andere VDMS SKUs
+
+
+
+=== Business Server (SKU: VDMS-AZURE-BUSINESS-VM)
+
+Der Business Server kann einer Umgebung hinzugefügt werden, um Anwendungen und Services zu unterstützen.
+
+*Jeder Business Server VM wird mindestens zugewiesen:*
+
+* 8 vCPUs
+* 64 gib RAM
+* 128 gib Standard-SSD-BS-Festplatte
+* Windows Server 2012R2/2016/2019
+* In der Regel aus dem link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] Und link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easyv4"] Familien von Azure Virtual Machines
+
+
+
+
+=== Zusätzlicher Storage (SKU: VDMS-1 TB-STORAGE-HPRSCLR)
+
+_Datenspeicherebene_ ist der primäre Storage-Mechanismus für die VDMS-Umgebung und läuft entweder auf Azure Dateien oder Azure NetApp Files (ANF). Die verwendete Speichertechnologie wird von den insgesamt gekauften VDMS bestimmt. Zusätzliche Kapazität kann in Schritten von 1 tib hinzugefügt werden.
+
+Benutzerprofile, Benutzerdaten, Unternehmensfreigaben, Applikationsdaten und Datenbanken sollten von diesem Storage Service ausgeführt werden. Es empfiehlt sich, möglichst keine Daten auf VM-Festplatten zu speichern.
+
+Die Kapazität entspricht der Summe der Benutzerzuweisung (25 gib/Benutzer) und des erworbenen zusätzlichen TIBs Storage.
+
+|===
+| Metrisch | link:https://docs.microsoft.com/en-us/azure/storage/files/storage-files-scale-targets#storage-account-scale-targets["Azure Files GPV2"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["ANF Standard"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["ANF Premium"] 
+
+
+| Benutzeranzahl | 10-49 | 50-249 | 250 und höher 
+
+
+| Mindestgröße | 250 gib | 4 tib | 4 tib 
+
+
+| IOPS | Bis zu 1,000 | Bis zu 250 tib | Bis zu 1,000 tib 
+|===

@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.prerequisites.html 
+summary: VORAUSSETZUNGEN FÜR VDMS 
+keywords:  
+---
+= Voraussetzungen für Virtual Desktop Managed Service (VDMS)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== M365-Lizenzierung
+
+VDMS werden mit Microsoft Windows Virtual Desktop (WVD)-Technologie erstellt. Gemäß den WVD-Voraussetzungen müssen den Endbenutzern spezifische Microsoft 365 (M365)-Lizenzen zugewiesen werden. Diese Lizenzierung ist nicht im VDMS-Abonnement enthalten. NetApp verkauft diese Lizenz nicht oder bietet sie anderweitig an.
+
+Die Verantwortung für die Einhaltung der M365-/WVD-Lizenzierung bleibt bei dem Kundenunternehmen, Partnerunternehmen und/oder dem jeweiligen M365-Anbieter.
+
+Es gibt eine Vielzahl von M365-Plänen, die die WVD-Lizenzierung für VDMS unterstützen. Details können sein link:https://azure.microsoft.com/en-us/pricing/details/virtual-desktop/["Gefunden hier"].
+
+
+
+== M365/Azure AD-Mandant
+
+Der Kunde muss über einen vorhandenen Azure AD Mandanten verfügen. Microsoft 365 basiert auf derselben Azure AD-Mandantenstruktur, daher erfüllt die M365-Lizenzierungsanforderungen (oben) auch diese Anforderung.
+
+
+
+== CSP-Reseller-Beziehung
+
+NetApp implementiert VDMS über unsere CSP-Partnerschaft mit Microsoft in einem dedizierten Azure-Abonnement. Um dieses Abonnement zu implementieren, muss NetApp eine Reseller-Beziehung mit dem Azure AD-Mandanten des Kunden einrichten. Ein globaler Administrator für den Azure AD Mandanten des Kunden kann diese Beziehung hier akzeptieren:
+
+https://admin.microsoft.com/Adminportal/Home?invType=ResellerRelationship&partnerId=47c1f6d2-b112-48e0-915f-4304efffb3e8&msppId=0&DAP=true#/BillingAccounts/partner-invitation[]
+
+Multi-Partner-Funktionen nicht:
+
+* Ändern Sie die vorhandenen Abonnements des Kunden
+* Die bestehenden Abonnements oder Kontoeigentümer des Kunden wechseln
+* Ändern Sie die Bedingungen oder die Verpflichtungen des Kunden für eine der bestehenden Abonnements
+* Ändern Sie den Partner des Datensatzes für ein Abonnement
+* Weitere Einzelheiten dazu: https://docs.microsoft.com/en-us/partner-center/multipartner[]
+
+
+
+
+=== Delegierte Administratorrechte
+
+Der Link „Einladung“ (oben) beinhaltet eine Anfrage für delegierte Administratorberechtigungen. Mit der Akzeptanz werden die Rollen des NetApp Global Admin und Helpdesk Administrators im Azure AD-Mandanten des Kunden zugewiesen.
+
+
+
+== Umfang Des Virtuellen Netzwerks
+
+VDMS werden in einem virtuellen Netzwerk in Azure bereitgestellt. Der für dieses Netzwerk verwendete /20-IP-Bereich kann sich nicht mit anderen Netzwerken in ihrer Umgebung überschneiden.
+
+In jedem Szenario, in dem eine Netzwerkverbindung zwischen dem virtuellen VDMS-Netzwerk und anderen Kundennetzwerken hinzugefügt wird, wird die Überschneidung mit einem anderen Netzwerk-IP-Bereich VDMS unterbrochen. Daher ist es wichtig, dass VDMS einen völlig unbenutzten /20-Bereich verwenden.
+
+Der Umfang des /20-Netzwerks muss in einem dieser IP-Bereiche landen:
+
+* 10.0.0.0 – 10.255.255.255
+* 172.16.0.0 – 172.31.255.255
+* 192.168.0.0 – 192.168.255.255
+
+
+
+
+== VDMS-Arbeitsblatt bereitstellen
+
+Der Kunde/Partner muss das Arbeitsblatt zum Bereitstellen VON VDMS unter folgender Adresse ausfüllen:https://www.deployvdms.com/[]
+
+
+
+== Vorhandene AD-Integration
+
+Die Integration VON VDMS in einen vorhandenen Active Directory Domain Controller (AD DC) erfordert mehrere zusätzliche Voraussetzungen:
+
+
+
+=== Anmeldeinformationen Für Lokale Domänenadministration
+
+Ein lokales Domain-Administratorkonto mit Domainjoin-Rechten, auf der bestehenden Domain ist erforderlich, um die Integration zu etablieren.
+
+
+
+=== Azure AD Connect
+
+WVD erfordert, dass Azure AD mithilfe von AD Connect mit dem AD DC synchronisiert wird. Wenn dies nicht bereits eingerichtet ist, wird dies angezeigt link:https://www.microsoft.com/en-us/download/details.aspx?id=47594["Utility"] Muss auf Ihrem AD DC installiert und konfiguriert sein.
+
+/==== Network Contributor Role for vnet Peering /===== Local Gateway Device Admin Rights to Setup VPN /==== DNS Zones (Need more Tech info) /==== no multi-Domain forrest, users must be in the Domain we are Deploying to

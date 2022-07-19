@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: users.assigntoappgroup.html 
+summary: Zuweisen von Benutzern zu Anwendungsgruppen in VDMS 
+keywords:  
+---
+= Zuweisen von Benutzern zu Anwendungsgruppen
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Methode Der Benutzerzuweisung
+
+Benutzer werden über AD-Sicherheitsgruppen einer virtuellen Session-Host-Maschine (SHVM) zugewiesen.
+
+Für jeden Host-Pool gibt es eine verknüpfte Benutzergruppe auf der Registerkarte „Benutzer & Gruppen“ im Arbeitsbereich.
+
+Benutzergruppen werden mit der Workspace-ID (ein eindeutiger 3-4-stelliger Code für jeden Arbeitsbereich) benannt, gefolgt vom Namen des Host-Pools.
+
+Zum Beispiel ist die Gruppe „jzsx freigegebene Benutzer“ mit dem Host-Pool für freigegebene Benutzer in VDMS verknüpft. Alle Benutzer, die „jzsx freigegebene Benutzer“ hinzugefügt wurden, werden den Sitzungshosts im Host-Pool „freigegebene Benutzer“ Zugriff zugewiesen.
+
+.Um einen Benutzer seinem Host-Pool zuzuweisen
+. Navigieren Sie im Arbeitsbereich zu „Benutzer & Gruppen“
+. Benutzer können der Gruppe hinzugefügt werden, indem Sie die Benutzerliste innerhalb der Gruppe bearbeiten.
+. Die Automatisierung synchronisiert automatisch die Mitglieder der Benutzergruppe, so dass dem Benutzer der Zugriff auf den entsprechenden Host-Pool, die App-Gruppe und die Anwendungen gewährt wird.
+
+
+
+NOTE: Benutzer sollten nur einer (und nur einer) App-Gruppe zugewiesen werden. Der Typ des Host-Pools (Shared, VDI oder GPU) muss mit den lizenzierten SKUs übereinstimmen, die für VDMS erworben wurden. Eine falsche Ausrichtung von Benutzern und/oder eine Zuweisung zu mehreren Applikationsgruppen kann zu Ressourcenkonflikten führen und deren Kollegen in der Umgebung möglicherweise beeinträchtigen.

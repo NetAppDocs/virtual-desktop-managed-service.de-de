@@ -1,0 +1,79 @@
+---
+sidebar: sidebar 
+permalink: administration.pam.html 
+summary: Domain-Zugriff auf VIRTUELLE VDMS wird erhalten 
+keywords:  
+---
+= Generieren Sie die Anmeldeinformationen für Domänenadministratoranmeldeinformationen in VDMS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Management Von Privilegierten Zugriffsberechtigungen
+
+VDMS Administratoren können die Funktion „PAM Approver“ erhalten, mit der der Administrator PAM-Anfragen erteilen kann.
+
+PAM-Anfragen generieren ein Administratorkonto auf Domänenebene, das zur Authentifizierung in VDMS VMs verwendet wird, wenn die Just-in-Time-Anmeldedaten der lokalen Administratoren nicht ausreichen.
+
+Jeder VDMS-Administrator kann eine PAM-Anfrage einreichen, aber nur Administratoren mit der Rolle „PAM Approver“ können die Anforderungen genehmigen. Ein PAM Approver kann seinen eigenen Antrag anfordern und genehmigen.
+
+
+
+=== Senden Sie eine PAM-Anfrage
+
+.Um eine PAM-Anfrage einzureichen
+. Navigieren Sie oben rechts zu Ihrem Admin-Benutzernamen und klicken Sie auf „Einstellungen“.
+. Wählen Sie die Registerkarte „PAM Requests“ aus
+. Klicken Sie Auf „+ Hinzufügen“.
++
+.. Wählen Sie eine Dauer aus, nach der diese Anmeldedaten verfallen
+.. Wählen Sie die Implementierung aus
+.. Geben Sie eine E-Mail-Adresse ein, die die Anmeldeinformationen eingegeben werden können. Dies kann eine beliebige E-Mail-Adresse sein, die es Dritten (z. B. einem Anbieter) ermöglicht, Domänenberechtigungen zu erhalten.
+.. Geben Sie eine Telefonnummer ein, die SMS empfangen kann
+.. Geben Sie alle Hinweise für die Protokolle und die Überprüfung durch den PAM Approver ein.
+
+
+. Klicken Sie Auf „Anfrage Hinzufügen“.
+
+
+
+
+=== Genehmigen einer PAM-Anfrage
+
+.PAM-Anfragen prüfen und genehmigen/ablehnen
+. . Navigieren Sie oben rechts zu Ihrem Admin-Benutzernamen und klicken Sie auf „Einstellungen“.
+. Wählen Sie die Registerkarte „PAM Requests“ aus, und klicken Sie auf die Anfrage
+. Prüfen Sie die Anfrage und klicken Sie auf „Genehmigen“ oder „Ablehnen“.
+. Geben Sie alle für die Entscheidung über Genehmigung/Ablehnung relevanten Hinweise ein
+
+
+
+
+=== Anhand von PAM generierten Zugangsdaten
+
+Nach der Genehmigung wird die angegebene E-Mail-Adresse eine Bestätigungs-E-Mail geschickt, um ihre Anmeldedaten zu aktivieren:
+
+[role="thumb"]
+image:administration.pam-c2382.png["900,900"]
+
+Wenn Sie den Link „Anfrage aktivieren“ folgen, wird der Benutzer auf die folgende Seite gebracht und ihm per SMS einen Bestätigungscode zukommen lassen. Sie werden auch aufgefordert, ein sicheres Passwort festzulegen.
+
+[role="thumb"]
+image:administration.pam-ea1ea.png["900,900"]
+
+Nach erfolgreicher Überprüfung des Kontos erhält der Benutzer eine Bestätigung mit seinem Benutzernamen.
+
+[role="thumb"]
+image:administration.pam-01f30.png["900,900"]

@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: applications.installapplications.html 
+summary: Installieren von Anwendungen auf den Session-Hosts innerhalb eines Host-Pools 
+keywords:  
+---
+= Installieren von Anwendungen auf der virtuellen Maschine(en) des Sitzungshosts
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Methodik Der Applikationsbereitstellung
+
+Benutzer können auf alle Anwendungen zugreifen, die auf der virtuellen Session-Host-Maschine (SHVM) installiert sind, auf der ihre Benutzersitzung ausgeführt wird.
+
+Benutzer werden einem Pool von SHVMs („Host Pool“) basierend auf ihrer Mitgliedschaft in einer Benutzergruppe zugewiesen. Jeder SHVM in diesem Host-Pool basiert auf dem gleichen VM Image, hat dieselben Anwendungen und läuft auf den gleichen VM-Ressourcen. Bei jeder Verbindung eines Benutzers werden sie dem SHVM in seinem Host-Pool mit den wenigsten aktuellen Benutzersitzungen zugewiesen.
+
+Durch Hinzufügen oder Entfernen von Anwendungen aus jedem SHVM im Hostpool kann der VDMS-Administrator kontrollieren, auf welche Anwendungen VDMS Benutzer zugreifen können.
+
+Das Hinzufügen (oder Entfernen) von Anwendungen aus jedem SHVM kann direkt auf jedem SHVM-Image oder zu einem einzelnen VM-Image durchgeführt werden, das wiederum auf allen SHVMs im Host-Pool eingesetzt werden kann.
+
+Dieser Artikel behandelt die direkte Installation von Anwendungen auf den SHVMs. VM-Image-Management ist in abgedeckt link:images.updateimages.html["Diesen Artikel"].
+
+
+
+=== Manueller Zugriff
+
+Das VDMS-Managementportal ermöglicht den direkten Zugriff auf jede VM über ein lokales „Just-in-Time“-Administratorkonto für alle SHVMs und Business Server. Über diesen Zugriff kann eine manuelle Verbindung zu jeder VM hergestellt werden, um Applikationen manuell zu installieren und andere Konfigurationsänderungen vorzunehmen.
+
+Diese Funktion finden Sie unter Workspace > Server > Aktionen > Verbinden
+
+[role="thumb"]
+image:applications.installapplications-171af.png["900,900"]
+
+Wenn Anmeldedaten für den Domänenadministrator erforderlich sind, werden mit DER PAM-Funktion (Privileged Access Management) VDMS Anmeldedaten für den Domänenadministrator generiert. Angaben können sein link:administration.pam.html["Gefunden hier"].
+
+
+
+=== VDMS Automation
+
+Im VDMS-Portal enthält der Abschnitt „skriptbasierte Ereignisse“ Funktionen zur Remote-Ausführung von Code.
+
+Die Registerkarte „Repository“ enthält unter „skriptbasierte Ereignisse“ globale Skripte, die von NetApp veröffentlicht werden. Benutzerdefinierte Skripts können über die Schaltfläche „+ Skript hinzufügen“ hinzugefügt werden.
+
+Auf der Registerkarte „Vorgänge“ finden Sie unter „skriptbasierte Ereignisse“ den Auslöser, der dazu führt, dass ein Skript für eine Reihe von VMs ausgeführt wird. FÜR VDMS sollten die Ereignistypen „manuell“ und „geplant“ am besten ein Skript über die entsprechenden virtuellen Maschinen übertragen werden.
+
+
+NOTE: Für Aktivitäten gibt es viele Trigger, die als „Ereignistypen“ bezeichnet werden. Für VDMS gelten die Typen „Application Install“ und „Application Uninstall“ nicht. Dies sind RDS-spezifische Auslöser und sollten für VDMS nicht verwendet werden, da VDMS ein WVD-basierter Service sind und der Designarchitektur von RDS entsprechen.
+
+
+
+=== Weitere Automatisierungstools
+
+Virtuelle Maschinen in VDMS können mit Management Tools von Drittanbietern verwaltet werden. Applikationsänderungen und andere VM-Konfigurationsänderungen können über alle kompatiblen Tools umgesetzt werden.

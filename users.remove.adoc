@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: users.remove.html 
+summary: Entfernen des Benutzerzugriffs in VDMS 
+keywords:  
+---
+= Benutzerzugriff Wird Entfernt
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Entfernen eines Benutzers
+
+.Neue Active Directory-Bereitstellungen (für VDMS wurde eine neue Active Directory-Domäne erstellt)
+. Löschen Sie den Benutzer in VDMS
++
+.. Navigieren Sie zum Arbeitsbereich, wählen Sie die Registerkarte „Benutzer & Gruppen“, klicken Sie auf die Aktionspunkte neben dem zu löschenden Benutzer und klicken Sie dann auf „Löschen“.image:users.remove01.png["900,900"]
+.. Es erscheint ein Popup-Fenster mit Optionen zum verzögern des Löschens und Löschen aus dem Verzeichnisimage:users.remove02.png["900,900"]
++
+... Die Löschoption Delay wartet 90 Minuten vor dem Löschen des Benutzers, wodurch der Prozess abgebrochen werden kann. Aktivieren Sie dieses Kontrollkästchen.
+... Mit der Option aus Verzeichnis löschen wird das Active Directory-Benutzerkonto gelöscht. Dieses Kontrollkästchen sollte aktiviert sein.
+
+
+
+
+. Benachrichtigen Sie NetApp über das Entfernen des Benutzers mit einer der folgenden Methoden
++
+.. E-Mail-Unterstützung: VDSsupport@netapp.com
+.. Telefon-Support: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["VDMS Support-Portal"]
+
+
+
+
+.Vorhandene Active Directory-Bereitstellungen (VDMS stellen eine Verbindung zu einem vorhandenen Active Directory her)
+. Löschen Sie den Benutzer in VDMS
++
+.. Navigieren Sie zum Arbeitsbereich, wählen Sie die Registerkarte „Benutzer & Gruppen“, klicken Sie auf die Aktionspunkte neben dem zu löschenden Benutzer und klicken Sie dann auf „Löschen“.image:users.remove01.png["900,900"]
+.. Es erscheint ein Popup-Fenster mit Optionen zum verzögern des Löschens und Löschen aus dem Verzeichnisimage:users.remove03.png["900,900"]
++
+... Die Löschoption Delay wartet 90 Minuten vor dem Löschen des Benutzers, wodurch der Prozess abgebrochen werden kann. Aktivieren Sie dieses Kontrollkästchen.
+... Mit der Option aus Verzeichnis löschen wird das Active Directory-Benutzerkonto gelöscht. Es wird empfohlen, dass dieses Kontrollkästchen NICHT aktiviert ist, und der Löschvorgang Ihres Unternehmens-Benutzerkontos wird befolgt, um das Konto aus Active Directory zu löschen.
+
+
+
+
+. Benachrichtigen Sie NetApp über das Entfernen des Benutzers mit einer der folgenden Methoden
++
+.. E-Mail-Unterstützung: VDSsupport@netapp.com
+.. Telefon-Support: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["VDMS Support-Portal"]
+
+
+

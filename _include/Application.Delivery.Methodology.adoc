@@ -1,0 +1,15 @@
+= Methodik Der Applikationsbereitstellung
+:allow-uri-read: 
+
+
+
+
+== Methodik Der Applikationsbereitstellung
+
+Benutzer können auf alle Anwendungen zugreifen, die auf der virtuellen Session-Host-Maschine (SHVM) installiert sind, auf der ihre Benutzersitzung ausgeführt wird.
+
+Benutzer werden einem Pool von SHVMs („Host Pool“) basierend auf ihrer Mitgliedschaft in einer Benutzergruppe zugewiesen. Jeder SHVM in diesem Host-Pool basiert auf dem gleichen VM Image, hat dieselben Anwendungen und läuft auf den gleichen VM-Ressourcen. Bei jeder Verbindung eines Benutzers werden sie dem SHVM in seinem Host-Pool mit den wenigsten aktuellen Benutzersitzungen zugewiesen.
+
+Durch Hinzufügen oder Entfernen von Anwendungen aus jedem SHVM im Hostpool kann der VDMS-Administrator kontrollieren, auf welche Anwendungen VDMS Benutzer zugreifen können.
+
+Das Hinzufügen (oder Entfernen) von Anwendungen aus jedem SHVM kann direkt auf jedem SHVM-Image oder zu einem einzelnen VM-Image durchgeführt werden, das wiederum auf allen SHVMs im Host-Pool eingesetzt werden kann.

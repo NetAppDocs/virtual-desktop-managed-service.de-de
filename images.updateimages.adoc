@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: images.updateimages.html 
+summary: Aktualisieren und Bereitstellen von VM-Images in VDMS 
+keywords:  
+---
+= Aktualisieren und Implementieren von VM Images
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Methodik Der Applikationsbereitstellung
+
+Benutzer können auf alle Anwendungen zugreifen, die auf der virtuellen Session-Host-Maschine (SHVM) installiert sind, auf der ihre Benutzersitzung ausgeführt wird.
+
+Benutzer werden einem Pool von SHVMs („Host Pool“) basierend auf ihrer Mitgliedschaft in einer Benutzergruppe zugewiesen. Jeder SHVM in diesem Host-Pool basiert auf dem gleichen VM Image, hat dieselben Anwendungen und läuft auf den gleichen VM-Ressourcen. Bei jeder Verbindung eines Benutzers werden sie dem SHVM in seinem Host-Pool mit den wenigsten aktuellen Benutzersitzungen zugewiesen.
+
+Durch Hinzufügen oder Entfernen von Anwendungen aus jedem SHVM im Hostpool kann der VDMS-Administrator kontrollieren, auf welche Anwendungen VDMS Benutzer zugreifen können.
+
+Das Hinzufügen (oder Entfernen) von Anwendungen aus jedem SHVM kann direkt auf jedem SHVM-Image oder zu einem einzelnen VM-Image durchgeführt werden, das wiederum auf allen SHVMs im Host-Pool eingesetzt werden kann.
+
+Dieser Artikel befasst sich mit VM Image Management. Die direkte Installation von Anwendungen auf den SHVMs wird in abgedeckt link:applications.installapplications.html["Diesen Artikel"].
+
+
+
+=== Das VM-Image wird aktualisiert
+
+Die empfohlene Methode zum Hinzufügen (oder Entfernen) von Anwendungen zu SHVM(s) ist, indem das VM-Image bearbeitet wird, das dem Host-Pool zugewiesen ist. Sobald das VM-Image angepasst und validiert wurde, kann das VDMS Support-Team es auf Anfrage für alle SHVMs im Host Pool bereitstellen.
+
+.So bearbeiten Sie das VM Image
+. Navigieren Sie in der Bereitstellung im VDS-Portal zu „Provisioning Collections“
+. Klicken Sie auf die Provisioning-Sammlung, die dem Host-Pool zugeordnet ist, den Sie aktualisieren möchten.
++
+[role="thumb"]
+image:applications.addtoapplibrary-fdcc3.png["900,900"]
+
++
+.. Notieren Sie sich den Namen der VM-Vorlage im Abschnitt „Server“.
++
+[role="thumb"]
+image:applications.deployapps-0e39c.png["900,900"]
+
++
+[role="thumb"]
+image:applications.deployapps-c642c.png["900,900"]
+
+
+
+. Bearbeiten Sie die Server-Vorlage und stellen Sie sicher, dass es sich bei der Quellvorlage um die in Schritt 2.a angegebenen VM-Vorlage handelt Oben. Klicken Sie Auf „Weiter“.
++
+[role="thumb"]
+image:applications.deployapps-307cb.png[""]
+
+
+
+
+NOTE: *Diese Einstellungen können nicht bearbeitet werden:* 1. Typ = VDI 2. Share Drive = leer 3. Mindestcache = 0 4. Datenlaufwerk = Deaktiviert 5. Speichertyp = Standard_LRS
+
+. Die VDMS-Automatisierung baut jetzt eine temporäre VM in Azure auf, der Maschinenname lautet _CWT#_. Eine Erstellung dieser VM kann 25 Minuten dauern. Nach Abschluss des Vorgangs ändert sich der Status in „Ausstehend“.
++
+.. Beachten Sie: Diese VM wird bis zum Abschluss des Anpassungsprozesses ausgeführt. Daher ist es wichtig, die VM innerhalb eines oder zwei Tages zu erstellen, anzupassen und zu validieren.
+
+
+. Sobald die temporäre VM bereit ist, können Sie sich bei der VM anmelden, indem Sie die Bereitstellungssammlung bearbeiten und dann auf dem Server auf „Verbinden“ klicken.
++
+.. Wenn Sie zur Eingabe der Zugangsdaten aufgefordert werden, können die Anmeldeinformationen für den Domänenadministrator von jedem VDMS-Administrator mit „PAM Approver“-Rechten generiert werden.
+
+
+
+
+.So stellen Sie ein aktualisiertes VM-Image bereit
+. Wenn das VM-Image validiert wurde, wenden Sie sich an das VDMS-Support-Team, um eine Image-Aktualisierung zu planen.
+. Das Team wird neue Sitzungshosts basierend auf dem neuen Image erstellen.
++
+.. Falls erforderlich, koordinieren Sie bitte die Zeit zum Testen der neuen Hosts, bevor wir neue Benutzer zu den neuen Hosts weiterleiten.
+
+
+. Sobald das Support-Team fertig ist, werden alle neuen Benutzersitzungen zu den neuen Hosts weitergeleitet. Wir schalten die alten Hosts aus, sobald keine Benutzer verbunden sind. Diese alten VMs befinden sich im Status „dezugewiesen“ für ein „warmes Failover“, doch werden diese VMs nach 7 Tagen automatisch gelöscht.
+
+
+
+
+=== Ändern der SHVM(s) direkt
+
+Änderungen können direkt auf den SHVM(s) manuell oder über alle verfügbaren Automatisierungstools vorgenommen werden. Weitere Informationen dazu finden Sie in link:applications.installapplications.html["Diesen Artikel"].
+
+Wenn Sie Änderungen direkt an den SHVMs in einem Host-Pool vornehmen, ist es wichtig, dass jeder SHVM auf die gleiche Weise konfiguriert bleibt, oder dass die Benutzer bei der Verbindung mit verschiedenen SHVMs inkonsistente Erfahrungen haben.
+
+
+WARNING: Standardmäßig werden einzelne SHVMs nicht gesichert, da sie in der Regel keine eindeutigen Daten haben und auf einem standardisierten VM Image basieren. Wenn Sie Änderungen direkt an den SHVMs vornehmen, wenden Sie sich an den Support, um eine Backup-Richtlinie auf eine der SHVMs im Host-Pool anzuwenden.
+
+
+
+=== Sysprep-Fehlerbehebung
+
+Die FUNKTION „Validieren“ DES VDMS-Images verwendet das Dienstprogramm Sysprep von Microsoft. Wenn die Validierung fehlschlägt, ist die häufigste Ursache ein Sysprep-Fehler. Um Fehler zu beheben, starten Sie in der Sysprep-Protokolldatei auf der CWT# VM im Pfad: C:\Windows\system32\Sysprep\Panther\setupact.log

@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: FAQ.vdsadminpermissions.html 
+summary: Zusammenfassung der VDS-Administratorberechtigungen 
+keywords:  
+---
+= VDS-Administratorberechtigungen
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Administratorberechtigungen – Übersicht
+
+VDMS Administratoren haben beschränkten Zugriff auf das VDS-Verwaltungsportal. Da VDMS eine gemeinsam gemanagte Lösung sind, gibt es Berechtigungssätze, die für VDMS-Administratoren nicht aktiviert sind. Diese Aktionen sind für das NetApp Support-Team reserviert. Wenn Maßnahmen erforderlich sind, die aufgrund von Berechtigungsbeschränkungen nicht ausgeführt werden können, wenden Sie sich an den Support.
+
+
+
+== Einstellungen Für Den Kontotyp
+
+Im VDMS-Administratorkonto sind die folgenden Einstellungen standardmäßig eingestellt.
+
+[cols="3*"]
+|===
+| Typ | Standardwert | Hinweise 
+
+
+| Technischer Account | Falsch | Kann auf Anfrage an den NetApp Support geändert werden. Wenn diese Option aktiviert ist, wird Administrator bei der Verbindung zu einer beliebigen VM über das VDS-Portal aufgefordert. Wenn diese Option deaktiviert ist, wird der Administrator bei der Verbindung mit einer beliebigen Mandanten-VM über das VDS-Portal automatisch authentifiziert (mit automatisch generiertem lokalen Administratorkonto). Administratoren werden nach wie vor zur Eingabe von Anmeldeinformationen aufgefordert, wenn sie sich mit einer beliebigen Plattform-Server-VM verbinden. 
+
+
+| link:administration.pam.html["PAM Genehmiger"] | Richtig | Kann auf Anfrage an den NetApp Support geändert werden. Allen Kunden muss mindestens ein Administratorkonto als PAM Approver aktiviert sein. 
+
+
+| Benutzersupport | Falsch | Diese Funktion gilt nicht für VDMS. 
+
+
+| Schattenbenutzer | Richtig | Kann auf Anfrage an den NetApp Support geändert werden. Wenn diese Option aktiviert ist, kann der Administrator eine Verbindung mit der Sitzung eines Endbenutzers herstellen und die für die Bereitstellung der Endbenutzerunterstützung erforderlichen Informationen anzeigen. 
+
+
+| MFA aktiviert | Richtig | Erfordert, dass der Administratorzugriff auf DAS VDMS-Verwaltungsportal mithilfe integrierter MFA gesichert werden muss. SMS- und/oder E-Mail-Methoden werden unterstützt. 
+|===
+
+
+== Administrator-Kontoberechtigungen
+
+Im VDMS-Administratorkonto sind die folgenden Berechtigungen standardmäßig aktiviert.
+
+[cols="6*"]
+|===
+| Modul | Anzeigen | Bearbeiten | Löschen | Zusatz | Hinweise 
+
+
+| Admin | Ein | Aus | Ein | Aus | Das Hinzufügen von Admin-Konten und/oder das Ändern von Admin-Berechtigungen wird vom NetApp Support bearbeitet. 
+
+
+| App-Services | Aus | Aus | Aus | Aus | Die App-Services-Funktionen sind keine unterstützte Funktion in VDMS. 
+
+
+| Applikationen Unterstützt | Aus | Aus | Aus | Aus | Die Anwendungsfunktionen in VDS sind RDS-spezifisch. VDMS sind ein WVD-basiertes Service- und Anwendungsmanagement wird mit dieser Funktion nicht behandelt. Siehe link:mages.updateimages.html["Aktualisieren und Bereitstellen von Images"] Weitere Informationen zur Anwendungsbereitstellung für VDMS. 
+
+
+| Audits | Ein | Ein | Ein | Ein |  
+
+
+| Clients | Ein | Ein | Aus | Aus | Die Erstellung/Entfernung des Clients erfolgt über den NetApp Support. 
+
+
+| Implementierungen | Ein | Ein | Aus | Aus | Die Erstellung/Entfernung der Implementierung erfolgt über den NetApp Support. 
+
+
+| Firewall-Regeln | Ein | Ein | Ein | Ein |  
+
+
+| Ordner | Ein | Ein | Ein | Ein |  
+
+
+| Gruppen | Ein | Ein | Aus | Ein | Das Löschen von Benutzergruppen wird vom NetApp Support bearbeitet. Bestimmte Benutzergruppen sind erforderlich 
+
+
+| Partner | Ein | Aus | Aus | Aus | Die Funktionssatz für Partner ist keine unterstützte Funktion in VDMS. Zum Anzeigen von Mandantenlisten erforderliche Berechtigungen anzeigen. 
+
+
+| Bereitstellungsvorlagen | Ein | Ein | Aus | Aus | Die Erstellung/Entfernung von Bildern erfolgt über den NetApp Support. 
+
+
+| Berichte An | Ein | Ein | Ein | Ein |  
+
+
+| Ressourcen | Ein | Aus | Aus | Aus | Ressourceneinstellungen werden durch NetApp Support übernommen. 
+
+
+| Skriptbasierte Ereignisse | Ein | Ein | Ein | Ein |  
+
+
+| Server | Ein | Ein | Aus | Aus | Einstellungen zur Servererstellung/-Entfernung werden vom NetApp Support übernommen. 
+
+
+| Service Board | Ein | Ein | Ein | Ein |  
+
+
+| Einstellungen | Ein | Ein | Ein | Ein |  
+
+
+| Benutzer | Ein | Ein | Ein | Ein |  
+
+
+| Arbeitsbereiche | Ein | Ein | Aus | Aus | Workspace-Erstellung/-Entfernung wird vom NetApp Support gehandhabt. 
+|===
